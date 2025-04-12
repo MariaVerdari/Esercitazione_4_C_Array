@@ -1,5 +1,5 @@
 #pragma once
-
+#include <string>
 #include <iostream>
 
 using namespace std;
@@ -11,22 +11,22 @@ bool ImportVectors(const string& inputFilePath,
                    double*& r);
 		
 		
- double FinalValue(const int& n, const double S,
+ double FinalValue(const int n, const double S,
                         const double* const& w,
                         const double* const& r);
 						
 						
- double RateOfReturn(const int& n, const double S,
-                        const double* const& w,
+ double RateOfReturn(const int n, const double S,
+                       const double* const& w,
                         const double* const& r);
 						
 bool ExportResult(const string& outputFilePath,
 				const double S,
-                  const int& n,
+                  const int n,
                   const double* const& w,
                   const double* const& r,
-                  const  double& FinalValue,
-				  const double& RateOfReturn);						
+                  const  double FinalValue,
+				  const double RateOfReturn);						
 						
 		
 						

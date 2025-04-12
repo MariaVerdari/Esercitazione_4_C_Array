@@ -1,14 +1,13 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <vector>
 #include <string>
 #include "Utils.hpp"
 
 using namespace std;
+
 int main()
 {
-	
 	string inputFile = "data.txt";
 	int n ;
 	double S;
@@ -31,7 +30,7 @@ int main()
                         
 	string outputFile = "result.txt";
 	
-	bool b = ExportResult( outputFile, S, n, w, r,V,  ror);
+	bool b = ExportResult( outputFile, S, n, w, r, V, ror);
 				
 			
                  

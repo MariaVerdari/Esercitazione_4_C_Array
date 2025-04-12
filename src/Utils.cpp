@@ -3,7 +3,7 @@
 #include "iostream"
 #include "fstream"
 #include "sstream"
-#include<iomanip>
+#include <iomanip>
 #include <array>
 
 
@@ -18,13 +18,12 @@ bool ImportVectors(const string& inputFilePath,
 	ifstream fstr(inputFilePath);
 	
 	
-	
 	if (fstr.fail()) {
 		return false;
 	}
 	
 
-	std ::string temp;
+	string temp;
 	getline(fstr, temp);
 	
 	int i = temp.find(";");
@@ -44,37 +43,32 @@ bool ImportVectors(const string& inputFilePath,
 	getline(fstr, temp);//tolgo riga
 	
 	
-	w = new double[n];
+	w = new double[n]; //alloco n double
 	r = new double[n];
 	
-	
 
-	
-	
 	
 	for (unsigned int j = 0; j<n; j++)
 	{
 		
-	std ::string temp;
 	getline(fstr, temp);
 	
 	
-	int i = temp.find(";");
+	i = temp.find(";");
 
 	w[j]=std::stod(temp.substr(0,i) );
 	r[j] =std::stod(temp.substr(i+1,temp.size()));
+	
 	}
 	
-	
-	
-	
+	fstr.close();
 	
 
     return true;
 }
 
 
-  double FinalValue(const int& n, const double S,
+  double FinalValue(const int n, const double S,
                         const double* const& w,
                         const double* const& r)
 {
@@ -89,18 +83,11 @@ bool ImportVectors(const string& inputFilePath,
 }
 
 
- double RateOfReturn(const int& n, const double S,
-                        const double * const& w,
-                        const double* const& r)
+ double RateOfReturn(const int n, const double S,
+                        const double* const& w,
+                       const double* const& r)
 {
-	/*
-	double V = 0;
-	
-	for (unsigned int i = 0; i<n; i++){
-		V+=(1+r[i])*w[i]*S;
-		
-	}
-	*/
+
 	double V = FinalValue(n, S, w, r);
 	double ror = (V/S) - 1.0;
 	
@@ -110,13 +97,12 @@ bool ImportVectors(const string& inputFilePath,
 
 
 bool ExportResult(const string& outputFilePath,
-				const double S,
-			
-                  const int& n,
+				  const double S,
+				  const int n,
                   const double * const& w,
                   const double * const& r,
-                  const double& FinalValue,
-				  const double& RateOfReturn)
+                  const double FinalValue,
+				  const double RateOfReturn)
 {
     ofstream file;
     file.open(outputFilePath);
