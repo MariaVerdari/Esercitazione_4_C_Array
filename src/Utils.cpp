@@ -4,8 +4,7 @@
 #include "fstream"
 #include "sstream"
 #include<iomanip>
-#include <vector>
-#include <locale>
+#include <array>
 
 
 using namespace std;
@@ -26,30 +25,30 @@ bool ImportVectors(const string& inputFilePath,
 	
 
 	std ::string temp;
-	getline(fstr, temp);//tolgo prima riga
+	getline(fstr, temp);
 	
 	int i = temp.find(";");
 
-	 S = std::stod(temp.substr(i+1,temp.size()));
+	S = std::stod(temp.substr(i+1,temp.size()));
       
-
+	
+	
+	getline(fstr, temp);
+	
+	i = temp.find(";");
+	
+	n =std::stoi(temp.substr(i+1,temp.size()));
 	
 	
 	
-	std ::string temp1;
-	getline(fstr, temp1);//tolgo prima riga
+	getline(fstr, temp);//tolgo riga
 	
-	int k = temp1.find(";");
-	
-
-	
-	
-	n =std::stoi(temp1.substr(k+1,temp1.size()));
-	
-	getline(fstr, temp);//tolgo altra rig
 	
 	w = new double[n];
 	r = new double[n];
+	
+	
+
 	
 	
 	
@@ -75,11 +74,11 @@ bool ImportVectors(const string& inputFilePath,
 }
 
 
- long double FinalValue(const size_t& n, const double S,
-                        const double * const& w,
+  double FinalValue(const int& n, const double S,
+                        const double* const& w,
                         const double* const& r)
 {
-	long double V = 0;
+	double V = 0;
 	
 	for (unsigned int i = 0; i<n; i++){
 		V+=(1+r[i])*w[i]*S;
@@ -90,34 +89,35 @@ bool ImportVectors(const string& inputFilePath,
 }
 
 
- double RateOfReturn(const size_t& n, const double S,
+ double RateOfReturn(const int& n, const double S,
                         const double * const& w,
                         const double* const& r)
 {
+	/*
 	double V = 0;
 	
 	for (unsigned int i = 0; i<n; i++){
 		V+=(1+r[i])*w[i]*S;
 		
 	}
+	*/
+	double V = FinalValue(n, S, w, r);
+	double ror = (V/S) - 1.0;
 	
-	double rof = (V/S) - 1.0;
-	
-    return rof;
+    return ror;
 }
 
 
 
 bool ExportResult(const string& outputFilePath,
-				const double& S,
+				const double S,
 			
-                  const size_t& n,
+                  const int& n,
                   const double * const& w,
                   const double * const& r,
-                  const long double& FinalValue,
+                  const double& FinalValue,
 				  const double& RateOfReturn)
 {
-    // Open File
     ofstream file;
     file.open(outputFilePath);
 
@@ -139,13 +139,12 @@ bool ExportResult(const string& outputFilePath,
         file << r[i]<< " ";
     file << "]"<<endl;
 	
-	file<<"Rate of return of the portfolio: "<<defaultfloat<<RateOfReturn<<endl;
-	file<<"V: "<<FinalValue<<endl;
+	file<<"Rate of return of the portfolio: "<<fixed<<setprecision(4)<<RateOfReturn<<endl;
+	file<<"V: "<<fixed<<setprecision(2)<<FinalValue<<endl;
 
    
-
-    // Close File
     file.close();
+	
 	
 	
 	cout << "S = "<<fixed<<setprecision(2)<<S<< ", n = " <<n<<endl;

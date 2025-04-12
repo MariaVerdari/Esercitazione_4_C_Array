@@ -9,7 +9,7 @@ using namespace std;
 int main()
 {
 	
-	std ::string inputFile = "data.txt";
+	string inputFile = "data.txt";
 	int n ;
 	double S;
 	double*w= nullptr;
@@ -17,37 +17,30 @@ int main()
 	bool a = ImportVectors(inputFile,n, S, w, r);
 	
 	
-	if (!ImportVectors(inputFile,n, S, w, r)) {
-		return 1; // se importvector è falso
+	if (!a) {
+		return 1; 
 	}
 	
 	
 	
-	long double V = FinalValue( n, S,
-                         w,
-                        r);
+	double V = FinalValue(n, S, w, r);
+                       
 						
-	double rof= RateOfReturn( n, S,
-                        w,
-                         r);
+	double ror= RateOfReturn(n, S, w, r);
+                       
+                        
+	string outputFile = "result.txt";
 	
-	
-	std ::string outputFile = "result.txt";
-	
-	bool b = ExportResult( outputFile,
-				 S,
+	bool b = ExportResult( outputFile, S, n, w, r,V,  ror);
+				
 			
-                   n,
-                   w,
-                   r,
-                  V,
-				  rof);
-	
-	
+                 
+	if (!b) {
+		return 1; 
+	}
 
 	
     return 0;
 	
-	cout<<w[0];
 }
 
