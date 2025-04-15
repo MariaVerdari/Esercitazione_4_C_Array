@@ -24,19 +24,18 @@ bool ImportVectors(const string& inputFilePath,
 	
 
 	string temp;
-	getline(fstr, temp);
 	
-	int i = temp.find(";");
-
-	S = std::stod(temp.substr(i+1,temp.size()));
-      
+	char separator = ';';
 	
+    getline(fstr, temp, separator); 
+	getline(fstr, temp); 
 	
-	getline(fstr, temp);
+	S = stod(temp);
 	
-	i = temp.find(";");
+	getline(fstr, temp, separator);
+	getline(fstr, temp); 
 	
-	n =std::stoi(temp.substr(i+1,temp.size()));
+	n =stod(temp);
 	
 	
 	
@@ -50,14 +49,12 @@ bool ImportVectors(const string& inputFilePath,
 	
 	for (unsigned int j = 0; j<n; j++)
 	{
-		
-	getline(fstr, temp);
+			
+	getline(fstr, temp, separator);
+	w[j]=std::stod(temp);
 	
-	
-	i = temp.find(";");
-
-	w[j]=std::stod(temp.substr(0,i) );
-	r[j] =std::stod(temp.substr(i+1,temp.size()));
+	getline(fstr, temp); 
+	r[j] =std::stod(temp);
 	
 	}
 	
